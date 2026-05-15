@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js + Tanstack Query Template
 
-## Getting Started
+## Configuration
+* Start a Next.js project following the official docs:    
+`npx create-next-app@latest my-app --yes`  
+https://nextjs.org/docs/app/getting-started/installation
 
-First, run the development server:
+* Install Tanstack Query following the official docs:  
+`npm i @tanstack/react-query @tanstack/react-query-devtools`  
+https://tanstack.com/query/latest/docs/framework/react/installation  
+https://tanstack.com/query/latest/docs/framework/react/devtools
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* Create a folder in your project and copy both files (*get-query-client.ts*, and *providers.tsx*) within */tanstack-query* folder to it
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Wrap your main *layout.tsx* with the *Providers* from *providers.tsx*
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Use Cases
+### API Call within the */lib* folder
+* *pokemon-api-calls.ts*  
+A regular API call using *fetch*.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Components within the */components* folder
+* *pokemon-list-client.tsx*  
+The usual way to use Tanstack Query using the *useQuery* hook.
 
-## Learn More
+* *pokemon-list-server.tsx*  
+Use this pattern in Server Components that render the data directly.
 
-To learn more about Next.js, take a look at the following resources:
+* *pokemon-list-client-from-server.tsx* (Client Component) + *pokemon-list-sever-prefetched.tsx* (Server Component)  
+This pattern retrieves the data in the Server Component and passes it to the Client Component.  
+Note that the Client Component uses an empty *queryFn*, but it has the same *queryKey* as the Server Component, so it can retrieve the data from the cache without making an additional API call.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Result at */app/tanstack-query/page.tsx*
+* page.tsx  
+A page wrapper to show the use cases.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Access the examples
+Access the examples at http://localhost:3000/tanstack-query after running your Next.js app.
