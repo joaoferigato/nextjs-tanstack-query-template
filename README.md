@@ -31,7 +31,7 @@ This pattern retrieves the data in the Server Component and passes it to the Cli
 Note that the Client Component uses an empty *queryFn*, but it has the same *queryKey* as the Server Component, so it can retrieve the data from the cache without making an additional API call.
 
 ### Result at */app/tanstack-query/page.tsx*
-* page.tsx  
+* *page.tsx*  
 A page wrapper to show the use cases.
 
 ## Access the examples
